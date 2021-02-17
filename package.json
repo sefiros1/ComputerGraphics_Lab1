@@ -1,0 +1,22 @@
+{
+  "name": "lab1",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "lint": "eslint -c .eslintrc --ext .ts ./src",
+    "start": "npm run build && electron ./src/main.js"
+  },
+  "author": "Dmitry",
+  "devDependencies": {
+    "@types/fs-extra": "^9.0.7",
+    "@typescript-eslint/eslint-plugin": "^3.4.0",
+    "@typescript-eslint/parser": "^3.4.0",
+    "electron": "^9.4.0",
+    "eslint": "^7.3.1",
+    "typescript": "^3.9.5"
+  },
+  "dependencies": {
+    "fs-extra": "^9.1.0"
+  }
+}
