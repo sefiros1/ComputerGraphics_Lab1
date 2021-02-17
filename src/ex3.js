@@ -8,6 +8,15 @@ function scalarMultiplie(a, b) {
 function vectorModule(a) {
     return Math.sqrt(Math.pow(a.x, 2) + Math.pow(a.y, 2));
 }
+function getVectorByPoints(a, b) {
+    return { x: b.x - a.x, y: b.y - a.y };
+}
+function getLineByPoints(a, b) {
+    return { a: a.y - b.y, b: b.x - a.x, c: a.x * b.y - b.x * a.y };
+}
+function func(a, b) {
+    return a.a * b.x + a.b * b.y + a.c;
+}
 var input = [];
 var inputCount = 8;
 fs.readFileSync(path.join(__dirname, 'ex3.txt'))
@@ -24,18 +33,39 @@ var a = { x: input[0], y: input[1] };
 var b = { x: input[2], y: input[3] };
 var c = { x: input[4], y: input[5] };
 var d = { x: input[6], y: input[7] };
-var ba = { x: a.x - b.x, y: a.y - b.y };
-var bc = { x: c.x - b.x, y: c.y - b.y };
-var bd = { x: d.x - b.x, y: d.y - b.y };
-var cosABC = scalarMultiplie(ba, bc) / (vectorModule(ba) * vectorModule(bc));
-console.log("ba = " + JSON.stringify(ba));
-console.log("bc = " + JSON.stringify(bc));
-console.log("cosABC = " + cosABC);
-console.log("acos = " + Math.acos(cosABC));
-var cosABD = scalarMultiplie(ba, bd) / (vectorModule(ba) * vectorModule(bd));
-console.log("cosABD = " + cosABD);
-console.log("acos = " + Math.acos(cosABD));
-console.log("acos custom = " + Math.acos(1));
+var ba = getVectorByPoints(b, a);
+var ba_l = getLineByPoints(b, a);
+// console.log(JSON.stringify(ba_l));
+// console.log(ba_l.a*c.x + ba_l.b*c.y + ba_l.c)
+var ba_left = func(ba_l, d) >= 0;
+var bc_l = getLineByPoints(b, c);
+var bc_right = func(bc_l, d) <= 0;
+console.log(ba_left);
+console.log(bc_right);
+if (!ba_left && !bc_right) {
+    console.log("No");
+}
+else if (ba_left && bc_right) {
+    console.log("Yes");
+}
+else {
+    if (!ba_left) {
+        var sa = Math.sign(func(bc_l, a));
+        var sd = Math.sign(func(bc_l, d));
+        if (sa !== 0 && sa + sd === 0)
+            console.log('Yes');
+        else
+            console.log('No');
+    }
+    else if (!bc_right) {
+        var sc = Math.sign(func(bc_l, c));
+        var sd = Math.sign(func(bc_l, d));
+        if (sc !== 0 && sc + sd === 0)
+            console.log('Yes');
+        else
+            console.log('No');
+    }
+}
 // // B-A
 // let m1 = (a.x - b.x) / (a.y - b.y);
 // // C-A

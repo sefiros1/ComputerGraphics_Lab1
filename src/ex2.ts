@@ -27,12 +27,18 @@ let r2_dx = d.x - c.x;
 let r2_dy = d.y - c.y;
 
 // 1 way: the rays are co-directed
-let areRaysCoDirected = (Math.sign(r1_dx) === Math.sign(r2_dx) && Math.sign(r1_dy) === Math.sign(r2_dy))
+let areRaysCoDirected = (
+    Math.sign(r1_dx) === Math.sign(r2_dx) && 
+    Math.sign(r1_dy) === Math.sign(r2_dy)
+)
 
 // 2 way: the rays aren't co-directed
 //        but [A,B) and [A,C) are co-directed
 //        ( means C in [A,B) )
-let anotherBoolean = (Math.sign(r1_dx) === Math.sign(c.x - a.x) && Math.sign(r1_dy) === Math.sign(c.y - a.y))
+let anotherBoolean = (
+    Math.sign(r1_dx) === Math.sign(c.x - a.x) && 
+    Math.sign(r1_dy) === Math.sign(c.y - a.y)
+)
 
 if (areRaysCoDirected || anotherBoolean) {
     console.log("the rays intersect")

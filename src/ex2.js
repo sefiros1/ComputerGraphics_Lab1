@@ -25,11 +25,13 @@ var r1_dy = b.y - a.y;
 var r2_dx = d.x - c.x;
 var r2_dy = d.y - c.y;
 // 1 way: the rays are co-directed
-var areRaysCoDirected = (Math.sign(r1_dx) === Math.sign(r2_dx) && Math.sign(r1_dy) === Math.sign(r2_dy));
+var areRaysCoDirected = (Math.sign(r1_dx) === Math.sign(r2_dx) &&
+    Math.sign(r1_dy) === Math.sign(r2_dy));
 // 2 way: the rays aren't co-directed
 //        but [A,B) and [A,C) are co-directed
 //        ( means C in [A,B) )
-var anotherBoolean = (Math.sign(r1_dx) === Math.sign(c.x - a.x) && Math.sign(r1_dy) === Math.sign(c.y - a.y));
+var anotherBoolean = (Math.sign(r1_dx) === Math.sign(c.x - a.x) &&
+    Math.sign(r1_dy) === Math.sign(c.y - a.y));
 if (areRaysCoDirected || anotherBoolean) {
     console.log("the rays intersect");
 }
